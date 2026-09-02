@@ -9,5 +9,6 @@ namespace EducaWebApi.Domain.Entities
         public string Email { get; set; } = string.Empty;
         public DateTime DataNascimento { get; set; }
         public bool Ativo { get; set; }
+        public DateTime DataCadastro { get; set; }
     }
 }
