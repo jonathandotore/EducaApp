@@ -2,5 +2,5 @@
   <Project Path="../EducaWebApi.Data/EducaWebApi.Data.csproj" />
   <Project Path="../EducaWebApi.Domain/EducaWebApi.Domain.csproj" />
   <Project Path="../EducaWebApi.Service/EducaWebApi.Service.csproj" />
-  <Project Path="EducaWebApi.csproj" />
+  <Project Path="EducaWebApi.csproj" Id="a3935922-29cc-49a5-b32b-42ae2478e853" />
 </Solution>
