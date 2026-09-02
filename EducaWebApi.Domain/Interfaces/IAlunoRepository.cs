@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace EducaWebApi.Domain.Interfaces
 {
-    public interface IAlunoService
+    public interface IAlunoRepository
     {
         Task<ResultadosPaginados<AlunoResponseDto>> ListarPaginado(string nomeFiltro, int pagina, int tamanhoPagina);
         Task<AlunoResponseDto> ObterPorId(int id);
-        Task<AlunoResponseDto> Criar(Aluno aluno);
-        Task<AlunoResponseDto> Atualizar(int id, Aluno aluno);
-        Task<AlunoResponseDto> Inativar(int id);
+        Task<Aluno> Criar(Aluno aluno);
+        Task<Aluno> Atualizar(int id, Aluno aluno);
+        Task<Aluno> Inativar(int id);
     }
 }
