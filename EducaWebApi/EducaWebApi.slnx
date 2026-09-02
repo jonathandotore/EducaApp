@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="../EducaWebApi.Data/EducaWebApi.Data.csproj" />
+  <Project Path="../EducaWebApi.Domain/EducaWebApi.Domain.csproj" />
+  <Project Path="../EducaWebApi.Service/EducaWebApi.Service.csproj" />
   <Project Path="EducaWebApi.csproj" />
 </Solution>
