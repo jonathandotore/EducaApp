@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EducaWebApi.Data\EducaWebApi.Data.csproj" />
+    <ProjectReference Include="..\EducaWebApi.Domain\EducaWebApi.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

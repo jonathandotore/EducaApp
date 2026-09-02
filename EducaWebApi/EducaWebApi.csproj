@@ -303,6 +303,16 @@
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EducaWebApi.Domain\EducaWebApi.Domain.csproj">
+      <Project>{7e7823b2-93c0-45c3-a575-676a5422cfbc}</Project>
+      <Name>EducaWebApi.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EducaWebApi.Service\EducaWebApi.Service.csproj">
+      <Project>{243e5112-08d8-4392-9751-3b7b2df35968}</Project>
+      <Name>EducaWebApi.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
