@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using EducaWebApi.Filters;
+using Newtonsoft.Json;
 using System.Web.Http;
 
 namespace EducaWebApi
@@ -8,7 +9,11 @@ namespace EducaWebApi
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            
+            //Filtro de exceções do MainResponse
+            config.Filters.Add(new TratamentoDeExcecoesFilter());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
