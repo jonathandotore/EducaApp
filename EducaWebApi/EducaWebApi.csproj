@@ -156,11 +156,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
+    <Compile Include="Filters\ExceptionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\PaginacaoBase.cs" />
-    <Compile Include="Models\MainResponse.cs" />
+    <Compile Include="Models\Responses\PaginacaoBase.cs" />
+    <Compile Include="Models\Responses\MainResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +306,10 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EducaWebApi.Data\EducaWebApi.Data.csproj">
+      <Project>{676C5260-1C81-1DB1-EE37-ABDF640B97F1}</Project>
+      <Name>EducaWebApi.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EducaWebApi.Domain\EducaWebApi.Domain.csproj">
       <Project>{7e7823b2-93c0-45c3-a575-676a5422cfbc}</Project>
       <Name>EducaWebApi.Domain</Name>
