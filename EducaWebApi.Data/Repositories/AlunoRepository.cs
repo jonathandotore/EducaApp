@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using EducaWebApi.Data.Connection;
 using EducaWebApi.Domain.Dtos;
 using EducaWebApi.Domain.Entities;
@@ -60,24 +60,110 @@ namespace EducaWebApi.Data.Repositories
             }, "Erro na tentativa de listar alunos.");
         }
 
-        public async Task<AlunoResponseDto> ObterPorId(int id)
+        public Task<AlunoResponseDto> ObterPorId(int id)
         {
-            throw new System.NotImplementedException();
+            return ExecutarAsync(async () =>
+            {
+                const string sql = @"
+                    SELECT Id, Nome, Email, DataNascimento, Ativo, DataCadastro
+                    FROM Aluno
+                    WHERE Id = @Id;";
+
+                using (var conexao = _connectionFactory.CreateConnection())
+                {
+                    var aluno = await conexao.QuerySingleOrDefaultAsync<AlunoResponseDto>(sql, new { Id = id });
+                    if (aluno == null)
+                        throw new NotFoundException("Não foi possível identificar o aluno.");
+
+                    return aluno;
+                }
+            }, "Erro na tentativa de obter aluno.");
         }
 
-        public async Task<Aluno> Atualizar(int id, Aluno aluno)
+        public Task<AlunoResponseDto> Criar(AlunoRequestDto aluno)
         {
-            throw new System.NotImplementedException();
+            return ExecutarAsync(async () =>
+            {
+                var entidade = new Aluno
+                {
+                    Nome = aluno.Nome,
+                    Email = aluno.Email,
+                    DataNascimento = aluno.DataNascimento,
+                    Ativo = true,
+                    DataCadastro = DateTime.Now
+                };
+
+                const string sql = @"
+                    INSERT INTO Aluno (Nome, Email, DataNascimento, Ativo, DataCadastro)
+                    OUTPUT INSERTED.Id
+                    VALUES (@Nome, @Email, @DataNascimento, @Ativo, @DataCadastro);";
+
+                using (var conexao = _connectionFactory.CreateConnection())
+                {
+                    entidade.Id = await conexao.ExecuteScalarAsync<int>(sql, entidade);
+                }
+
+                return MapearParaResponseDto(entidade);
+            }, "Erro na tentativa de criar aluno.");
         }
 
-        public async Task<Aluno> Criar(Aluno aluno)
+        public Task<AlunoResponseDto> Atualizar(int id, AlunoRequestDto aluno)
         {
-            throw new System.NotImplementedException();
+            return ExecutarAsync(async () =>
+            {
+                const string sqlObter = @"
+                    SELECT Id, Nome, Email, DataNascimento, Ativo, DataCadastro
+                    FROM Aluno
+                    WHERE Id = @Id;";
+
+                const string sqlAtualizar = @"
+                    UPDATE Aluno
+                    SET Nome = @Nome, Email = @Email, DataNascimento = @DataNascimento
+                    WHERE Id = @Id;";
+
+                using (var conexao = _connectionFactory.CreateConnection())
+                {
+                    var entidade = await conexao.QuerySingleOrDefaultAsync<Aluno>(sqlObter, new { Id = id });
+                    if (entidade == null)
+                        throw new NotFoundException("Aluno não encontrado.");
+
+                    entidade.Nome = aluno.Nome;
+                    entidade.Email = aluno.Email;
+                    entidade.DataNascimento = aluno.DataNascimento;
+
+                    await conexao.ExecuteAsync(sqlAtualizar, entidade);
+
+                    return MapearParaResponseDto(entidade);
+                }
+            }, "Erro na tentativa de atualizar aluno.");
         }
 
-        public async Task<Aluno> Inativar(int id)
+        public Task<AlunoResponseDto> Inativar(int id)
         {
-            throw new System.NotImplementedException();
+            return ExecutarAsync(async () =>
+            {
+                const string sqlObter = @"
+                    SELECT Id, Nome, Email, DataNascimento, Ativo, DataCadastro
+                    FROM Aluno
+                    WHERE Id = @Id;";
+
+                const string sqlInativar = @"UPDATE Aluno SET Ativo = 0 WHERE Id = @Id;";
+
+                using (var conexao = _connectionFactory.CreateConnection())
+                {
+                    var entidade = await conexao.QuerySingleOrDefaultAsync<Aluno>(sqlObter, new { Id = id });
+                    if (entidade == null)
+                        throw new NotFoundException("Aluno não encontrado.");
+
+                    if (!entidade.Ativo)
+                        throw new ConflictException("Aluno já está inativo.");
+
+                    await conexao.ExecuteAsync(sqlInativar, new { Id = id });
+                    entidade.Ativo = false;
+
+                    return MapearParaResponseDto(entidade);
+                }
+            }, "Erro na tentativa de inativar aluno.");
         }
 
         #region Métodos privados
@@ -92,6 +178,19 @@ namespace EducaWebApi.Data.Repositories
             {
                 throw new DatabaseException(mensagemErro, ex);
             }
+        }
+
+        private static AlunoResponseDto MapearParaResponseDto(Aluno aluno)
+        {
+            return new AlunoResponseDto
+            {
+                Id = aluno.Id,
+                Nome = aluno.Nome,
+                Email = aluno.Email,
+                DataNascimento = aluno.DataNascimento,
+                Ativo = aluno.Ativo,
+                DataCadastro = aluno.DataCadastro
+            };
         }
 
         #endregion

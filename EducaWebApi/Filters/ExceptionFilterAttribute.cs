@@ -1,5 +1,5 @@
-﻿using EducaWebApi.Domain.Exceptions;
-using EducaWebApi.Models;
+using EducaWebApi.Domain.Exceptions;
+using EducaWebApi.Domain.Responses;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Net.Http;

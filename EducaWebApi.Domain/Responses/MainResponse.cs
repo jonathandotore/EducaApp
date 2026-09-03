@@ -1,6 +1,6 @@
-﻿using System.Net;
+using System.Net;
 
-namespace EducaWebApi.Models
+namespace EducaWebApi.Domain.Responses
 {
     public class MainResponse<T> : PaginacaoBase
     {
