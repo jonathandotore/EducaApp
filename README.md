@@ -110,7 +110,7 @@ Tabelas usadas pelas queries Dapper (não há script de criação versionado no 
 
 1. Abra `EducaWebApi/EducaWebApi.slnx` no Visual Studio (2022+) e restaure os pacotes NuGet.
 2. Ajuste a connection string `EducaWebApiConnection` em `EducaWebApi/Web.config` para o seu SQL Server local (atualmente aponta para `Server=localhost\SQLEXPRESS01;Database=TesteEscola`) e crie as tabelas listadas acima.
-3. Tenha um Redis acessível para o cache de turmas; a chave `RedisConnection` em `Web.config` aponta por padrão para `localhost:6379,abortConnect=false`. Sem Redis disponível a API continua funcionando (falhas de cache são só logadas via `Trace` e a leitura cai para o banco).
+3. Tenha um Redis acessível para o cache de turmas; a chave `RedisConnection` em `Web.config` aponta por padrão para `localhost:6379,abortConnect=false,connectTimeout=2500,connectRetry=1,syncTimeout=2500`. Sem Redis disponível a API continua funcionando (falhas de cache são só logadas via `Trace` e a leitura cai para o banco), com no máximo ~2,5s de espera por chamada de cache até desistir.
 4. Rode o projeto `EducaWebApi` (F5, via IIS Express).
 5. Acesse a documentação Swagger em `/swagger`.
 
