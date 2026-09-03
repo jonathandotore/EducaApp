@@ -112,8 +112,9 @@ Tabelas usadas pelas queries Dapper (não há script de criação versionado no 
 2. Ajuste a connection string `EducaWebApiConnection` em `EducaWebApi/Web.config` para o seu SQL Server local (atualmente aponta para `Server=localhost\SQLEXPRESS01;Database=TesteEscola`) e crie as tabelas listadas acima.
 3. Tenha um Redis acessível para o cache de turmas; a chave `RedisConnection` em `Web.config` aponta por padrão para `localhost:6379,abortConnect=false`. Sem Redis disponível a API continua funcionando (falhas de cache são só logadas via `Trace` e a leitura cai para o banco).
 4. Rode o projeto `EducaWebApi` (F5, via IIS Express).
-5. Acesse a documentação Swagger em `/swagger`.
-
+5. A aplicação `por padrão` irá abrir uma página WEB que disponibiliza um botão para obter a listagem das turmas.
+6. Caso prefira abrir a documentação no Swagger apenas adicione `/swagger` na URL.
+7. Caso prefira utilizar o Postman: o arquivo `json` da collection está no repositório, basta importá-lo.
 ## Testes
 
 ```
@@ -125,3 +126,4 @@ Cobrem `MatriculaService` e `TurmaService`, incluindo os fluxos de cache hit e c
 ## Status do projeto
 
 Projeto em desenvolvimento ativo. Este README reflete o que já está implementado e será atualizado conforme novas funcionalidades forem concluídas.
+
