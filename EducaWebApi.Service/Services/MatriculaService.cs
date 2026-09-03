@@ -1,3 +1,4 @@
+using EducaWebApi.Domain.Constants;
 using EducaWebApi.Domain.Dtos;
 using EducaWebApi.Domain.Exceptions;
 using EducaWebApi.Domain.Interfaces;
@@ -11,10 +12,12 @@ namespace EducaWebApi.Service.Services
     public class MatriculaService : IMatriculaService
     {
         private readonly IMatriculaRepository _matriculaRepository;
+        private readonly ICacheService _cacheService;
 
-        public MatriculaService(IMatriculaRepository matriculaRepository)
+        public MatriculaService(IMatriculaRepository matriculaRepository, ICacheService cacheService)
         {
             _matriculaRepository = matriculaRepository;
+            _cacheService = cacheService;
         }
 
         public async Task<MainResponse<MatriculaResponseDto>> Matricular(MatriculaRequestDto matricula)
@@ -37,7 +40,11 @@ namespace EducaWebApi.Service.Services
                 if (jaMatriculado)
                     throw new ConflictException("O aluno já está matriculado nesta turma.");
 
-                return await _matriculaRepository.Matricular(matricula);
+                var resultado = await _matriculaRepository.Matricular(matricula);
+
+                await _cacheService.RemoverAsync(CacheKeys.ListaTurmas);
+
+                return resultado;
             }, HttpStatusCode.Created);
         }
 
