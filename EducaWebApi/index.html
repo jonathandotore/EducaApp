@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EducaApp — Turmas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="hero">
+    <div class="hero-card">
+      <p class="eyebrow">EducaApp</p>
+      <h1>Turmas cadastradas</h1>
+      <p class="subtitle">Consulte a lista de turmas disponíveis diretamente da API.</p>
+
+      <button id="btn-listar" class="btn-primary" type="button">
+        <span class="btn-label">Listar turmas</span>
+        <span class="spinner" hidden aria-hidden="true"></span>
+      </button>
+    </div>
+  </main>
+
+  <div id="modal-dados" class="modal-overlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-dados-titulo">
+      <button class="modal-close" type="button" data-close aria-label="Fechar">&times;</button>
+      <h2 id="modal-dados-titulo">Turmas</h2>
+      <div class="table-wrapper">
+        <table class="turmas-table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Vagas totais</th>
+              <th>Vagas disponíveis</th>
+              <th>Ocupação</th>
+            </tr>
+          </thead>
+          <tbody id="turmas-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-erro" class="modal-overlay" hidden>
+    <div class="modal modal-erro" role="alertdialog" aria-modal="true" aria-labelledby="modal-erro-titulo">
+      <button class="modal-close" type="button" data-close aria-label="Fechar">&times;</button>
+      <div class="erro-icone" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="13"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <h2 id="modal-erro-titulo">Não foi possível carregar as turmas</h2>
+      <p id="modal-erro-mensagem" class="erro-mensagem"></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
