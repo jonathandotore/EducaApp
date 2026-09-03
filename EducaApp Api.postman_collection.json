@@ -1,0 +1,197 @@
+{
+  "info": {
+    "_postman_id": "68fbae49-16e8-43b0-98db-47f54991b464",
+    "name": "EducaApp Api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "18838778"
+  },
+  "item": [
+    {
+      "name": "Alunos",
+      "item": [
+        {
+          "name": "ListarPaginado",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{EducaAppApi}}/alunos",
+              "host": [
+                "{{EducaAppApi}}"
+              ],
+              "path": [
+                "alunos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cadastrar",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"Nome\": \"Mariana Rosalez\",\r\n  \"Email\": \"rosalez.mariana@apple.com.br\",\r\n  \"DataNascimento\": \"1994-08-24T16:17:31.999Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{EducaAppApi}}/alunos",
+              "host": [
+                "{{EducaAppApi}}"
+              ],
+              "path": [
+                "alunos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Inativar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{EducaAppApi}}/alunos/13",
+              "host": [
+                "{{EducaAppApi}}"
+              ],
+              "path": [
+                "alunos",
+                "13"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ListarPorId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{EducaAppApi}}/alunos/1",
+              "host": [
+                "{{EducaAppApi}}"
+              ],
+              "path": [
+                "alunos",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"Nome\": \"Jonathan Augusto Dotore\",\r\n  \"Email\": \"jdotore@outlook.com\",\r\n  \"DataNascimento\": \"1991-11-07T17:44:38.626Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{EducaAppApi}}/alunos/3",
+              "host": [
+                "{{EducaAppApi}}"
+              ],
+              "path": [
+                "alunos",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Turmas",
+      "item": [
+        {
+          "name": "ListarTurmas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{EducaAppApi}}/turmas",
+              "host": [
+                "{{EducaAppApi}}"
+              ],
+              "path": [
+                "turmas"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Matriculas",
+      "item": [
+        {
+          "name": "MatricularAlunoTurma",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"AlunoId\": 0,\r\n  \"TurmaId\": 0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{EducaAppApi}}/matriculas",
+              "host": [
+                "{{EducaAppApi}}"
+              ],
+              "path": [
+                "matriculas"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Relatórios",
+      "item": [
+        {
+          "name": "AlunosPorTurma",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{EducaAppApi}}/relatorios/alunos-por-turma",
+              "host": [
+                "{{EducaAppApi}}"
+              ],
+              "path": [
+                "relatorios",
+                "alunos-por-turma"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
