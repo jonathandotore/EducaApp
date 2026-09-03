@@ -1,4 +1,4 @@
-﻿namespace EducaWebApi.Models
+namespace EducaWebApi.Domain.Responses
 {
     public class PaginacaoBase
     {
