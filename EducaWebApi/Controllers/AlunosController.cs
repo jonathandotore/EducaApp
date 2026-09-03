@@ -1,12 +1,8 @@
-﻿using EducaWebApi.Data.Connection;
+using EducaWebApi.Data.Connection;
 using EducaWebApi.Data.Repositories;
 using EducaWebApi.Domain.Dtos;
-using EducaWebApi.Domain.Entities;
 using EducaWebApi.Domain.Interfaces;
-using EducaWebApi.Models;
 using EducaWebApi.Service.Services;
-using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -27,47 +23,35 @@ namespace EducaWebApi.Controllers
         [HttpGet, Route("")]
         public async Task<IHttpActionResult> Listar(string nome = null, int pagina = 1, int tamanhoPagina = 10)
         {
-            var resultado = await _alunoService.ListarPaginado(nome, pagina, tamanhoPagina);
-            var resposta = MainResponse<List<AlunoResponseDto>>
-                .Sucesso(resultado.Itens)
-                .ComPaginacao(resultado.Pagina, resultado.TamanhoPagina, resultado.TotalRegistros);
-
+            var resposta = await _alunoService.ListarPaginado(nome, pagina, tamanhoPagina);
             return Content(resposta.StatusCode, resposta);
         }
 
         [HttpGet, Route("{id:int}")]
         public async Task<IHttpActionResult> ObterPorId(int id)
         {
-            var aluno = await _alunoService.ObterPorId(id);
-            var resposta = MainResponse<AlunoResponseDto>.Sucesso(aluno);
-            
+            var resposta = await _alunoService.ObterPorId(id);
             return Content(resposta.StatusCode, resposta);
         }
 
         [HttpPost, Route("")]
-        public async Task<IHttpActionResult> Criar([FromBody] Aluno aluno)
+        public async Task<IHttpActionResult> Criar([FromBody] AlunoRequestDto aluno)
         {
-            var criado = await _alunoService.Criar(aluno);
-            var resposta = MainResponse<AlunoResponseDto>.Sucesso(criado, HttpStatusCode.Created);
-            
+            var resposta = await _alunoService.Criar(aluno);
             return Content(resposta.StatusCode, resposta);
         }
 
         [HttpPut, Route("{id:int}")]
-        public async Task<IHttpActionResult> Atualizar(int id, [FromBody] Aluno aluno)
+        public async Task<IHttpActionResult> Atualizar(int id, [FromBody] AlunoRequestDto aluno)
         {
-            var atualizado = await _alunoService.Atualizar(id, aluno);
-            var resposta = MainResponse<AlunoResponseDto>.Sucesso(atualizado);
-            
+            var resposta = await _alunoService.Atualizar(id, aluno);
             return Content(resposta.StatusCode, resposta);
         }
 
         [HttpDelete, Route("{id:int}")]
         public async Task<IHttpActionResult> Desativar(int id)
         {
-            var inativo = await _alunoService.Inativar(id);
-            var resposta = MainResponse<object>.Sucesso(null, HttpStatusCode.OK, "Cadastro inativado com sucesso.");
-            
+            var resposta = await _alunoService.Inativar(id);
             return Content(resposta.StatusCode, resposta);
         }
     }
