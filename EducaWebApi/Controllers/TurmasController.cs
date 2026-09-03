@@ -1,3 +1,4 @@
+using EducaWebApi.Data.Cache;
 using EducaWebApi.Data.Connection;
 using EducaWebApi.Data.Repositories;
 using EducaWebApi.Domain.Interfaces;
@@ -17,7 +18,7 @@ namespace EducaWebApi.Controllers
             _turmaService = turmaService;
         }
 
-        public TurmasController() : this(new TurmaService(new TurmaRepository(new SqlConnectionFactory()))) { }
+        public TurmasController() : this(new TurmaService(new TurmaRepository(new SqlConnectionFactory()), new RedisCacheService())) { }
 
         [HttpGet, Route("")]
         public async Task<IHttpActionResult> Listar()

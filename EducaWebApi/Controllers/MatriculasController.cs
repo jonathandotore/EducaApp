@@ -1,3 +1,4 @@
+using EducaWebApi.Data.Cache;
 using EducaWebApi.Data.Connection;
 using EducaWebApi.Data.Repositories;
 using EducaWebApi.Domain.Dtos;
@@ -18,7 +19,7 @@ namespace EducaWebApi.Controllers
             _matriculaService = matriculaService;
         }
 
-        public MatriculasController() : this(new MatriculaService(new MatriculaRepository(new SqlConnectionFactory()))) { }
+        public MatriculasController() : this(new MatriculaService(new MatriculaRepository(new SqlConnectionFactory()), new RedisCacheService())) { }
 
         [HttpPost, Route("")]
         public async Task<IHttpActionResult> Matricular([FromBody] MatriculaRequestDto matricula)
